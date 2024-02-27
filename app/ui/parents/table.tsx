@@ -20,11 +20,11 @@ export default async function ParentsTable({
   let combinedData: any[] = []; // Initialize combinedData here
 
   try {
-    console.log('开始请求家长数据')
-    parents = await fetchFilteredParents(query, currentPage, schoolName); // 这里出错了
-    console.log('页面中获取到的家长数据',parents)
+    parents = await fetchFilteredParents(query, currentPage, schoolName);
     parentEmails = parents.map((parent) => parent.email);
+    console.log('根据家长邮箱获取学生')
     students = await fetchStudentsByParentsEmail(parentEmails);
+    console.log('获取的学生数据',students)
 
     const studentFirstNamesByParentEmail: any[] = [];
 
@@ -32,7 +32,10 @@ export default async function ParentsTable({
       const studentFirstNames: string[] = [];
 
       for (const studentId of studentEntry.studentIds) {
+        console.log('根据学生ID获取学生')
         const student = await fetchStudentNameById(studentId);
+        console.log('学生信息',student)
+
         if (student) {
           studentFirstNames.push(student.name);
         }
@@ -54,7 +57,7 @@ export default async function ParentsTable({
         email: parent.email,
         name: `${parent.firstName} ${parent.lastName}`,
         phoneNum: parent.phoneNum,
-        students: studentNames,
+        students: studentNames || [],
       };
     });
 
