@@ -224,12 +224,13 @@ export async function fetchParentById(id: ObjectId) {
 
 export async function fetchStudentsByParentsEmail(emails: string[]) {
   return executeWithRetry(async () => {
+    console.log('开始链接数据库')
     const client = await connect();
     const db = client.db('GoGetKids');
 
     // Array to store student IDs for each parent email
     const studentIdsByParentEmail: any[] = [];
-
+console.log('链接完成')
     // Loop through each parent email
     for (const email of emails) {
       // Search for students associated with the current parent email
