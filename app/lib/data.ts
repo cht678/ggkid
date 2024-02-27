@@ -233,8 +233,9 @@ export async function fetchStudentsByParentsEmail(emails: string[]) {
     // Loop through each parent email
     for (const email of emails) {
       // Search for students associated with the current parent email
+      console.log('开始获取db中的学生信息')
       const students = await db.collection('students').find({ parent_id: email }).toArray();
-
+      console.log('db中的学生信息',students)
       // Extract student IDs and store them for the current parent email
       const studentIds = students.map(student => student._id);
       studentIdsByParentEmail.push({ email, studentIds });
