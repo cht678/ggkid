@@ -75,7 +75,7 @@ export default async function Page({
         <CreateParent />
       </div>
       {/*<Suspense key={query + currentPage} fallback={<ParentsTableSkeleton />}>*/}
-      {/*  <Table query={query} currentPage={currentPage} schoolName={schoolName} />*/}
+        <Table query={query} currentPage={currentPage} schoolName={schoolName} />
       {/*</Suspense>*/}
       <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPagesOrDefault} />
