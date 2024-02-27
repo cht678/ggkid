@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { UpdateTrip, DeleteTrip } from '@/app/ui/trips/buttons';
 import { fetchFilteredTrips } from '@/app/lib/data3';
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key } from 'react';
 
 export default async function TripsTable({
   query,

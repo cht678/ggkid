@@ -20,11 +20,11 @@ export default async function ParentsTable({
   let combinedData: any[] = []; // Initialize combinedData here
 
   try {
-    const {parents:p,studentFirstNamesByParentEmail} = await fetchFilteredParents(query, currentPage, schoolName);
+    const {parents:p,studentFirstNamesByParentEmail} = await fetchFilteredParents(query, currentPage, schoolName); // 这里链接了一次数据库
     parents = p
     // parentEmails = parents.map((parent) => parent.email);
     // console.log('根据家长邮箱获取学生')
-    // students = await fetchStudentsByParentsEmail(parentEmails);
+    // students = await fetchStudentsByParentsEmail(parentEmails); // 这里链接第二次数据库
     // console.log('获取的学生数据',students)
 
     // const studentFirstNamesByParentEmail: any[] = [];
@@ -34,7 +34,7 @@ export default async function ParentsTable({
     //
     //   for (const studentId of studentEntry.studentIds) {
     //     console.log('根据学生ID获取学生')
-    //     const student = await fetchStudentNameById(studentId);
+    //     const student = await fetchStudentNameById(studentId); // 这里链接了第三次数据
     //     console.log('学生信息',student)
     //
     //     if (student) {

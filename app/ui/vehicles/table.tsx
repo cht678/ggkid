@@ -1,20 +1,25 @@
 import Link from 'next/link';
 import { UpdateVehicle, DeleteVehicle } from '@/app/ui/vehicles/buttons';
 import { fetchFilteredVehicles } from '@/app/lib/data3';
+import {fetchFilteredParents} from "@/app/lib/data";
 
+interface VehiclesTableProps {
+  query: string;
+  currentPage: number;
+  companyName: string;
+}
 export default async function VehiclesTable({
   query,
   currentPage,
   companyName,
-}: {
-  query: string;
-  currentPage: number;
-  companyName: string;
-}) {
+}:VehiclesTableProps) {
   let vehicles: any[] = [];
+  let combinedData: any[] = [];
 
   try {
-    vehicles = await fetchFilteredVehicles(query, currentPage, companyName);
+    vehicles = await fetchFilteredVehicles(query, currentPage, companyName); // 这里链接了一次数据库
+
+
   } catch (error) {
     console.error('Error fetching vehicles:', error);
   }

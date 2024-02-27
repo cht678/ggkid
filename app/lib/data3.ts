@@ -33,6 +33,7 @@ export async function fetchFilteredVehicles(query: string, currentPage: number, 
     const db = client.db('GoGetKids');
     const vehiclesCollection = db.collection('vehicles');
 
+
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
     const vehicles = await vehiclesCollection
       .find({ company_name: companyName }) // Filter by school name
@@ -43,6 +44,7 @@ export async function fetchFilteredVehicles(query: string, currentPage: number, 
 
     await client.close();
     return vehicles;
+
   });
 }
 

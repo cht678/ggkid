@@ -139,7 +139,7 @@ export async function fetchAllStudentIds(schoolName: string) {
 
 export async function fetchFilteredParents(query: string, currentPage: number, schoolName: string) {
   return executeWithRetry(async () => {
-    const client = await connect();
+    const client = await connect();   //链接数据库
     const db = client.db('GoGetKids');
     const studentsCollection = db.collection('students');
     const parentsCollection = db.collection('users');
@@ -202,7 +202,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
       });
     }
 
-    await client.close();
+    await client.close();   //关闭数据库
     return {
       parents,
       studentFirstNamesByParentEmail,
