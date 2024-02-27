@@ -139,6 +139,7 @@ export async function fetchAllStudentIds(schoolName: string) {
 
 export async function fetchFilteredParents(query: string, currentPage: number, schoolName: string) {
   return executeWithRetry(async () => {
+
     const client = await connect();
     const db = client.db('GoGetKids');
     const studentsCollection = db.collection('students');
@@ -150,7 +151,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
     const students = await studentsCollection
       .find({ school_name: schoolName })
       .toArray();
-
+    console.log('学生', students)
     // Extract parent IDs (emails) from the students
     const parentIds = students.map(student => student.parent_id);
 

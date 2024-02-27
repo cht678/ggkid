@@ -20,7 +20,7 @@ export default async function ParentsTable({
   let combinedData: any[] = []; // Initialize combinedData here
 
   try {
-    parents = [] || await fetchFilteredParents(query, currentPage, schoolName);
+    parents = await fetchFilteredParents(query, currentPage, schoolName); // 这里出错了
     parentEmails = parents.map((parent) => parent.email);
     students = await fetchStudentsByParentsEmail(parentEmails);
 
