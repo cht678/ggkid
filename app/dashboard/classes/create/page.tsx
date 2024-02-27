@@ -22,14 +22,17 @@ export default async function Page() {
     return null; // Or handle the error in some other way
   }
 
-  // Extract user ID from decoded token
+  /*// Extract user ID from decoded token
   const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
 
   // Fetch the company name using the user ID
   const schoolName = await fetchSchoolName(sessionUserId);
-  console.log('Company Name:', schoolName);
+  console.log('School Name:', schoolName);
 
-  const teachers = await fetchAllTeachersEmail(schoolName);
+  const teachers = await fetchAllTeachersEmail(schoolName);*/
+    // Extract school_name from decoded token
+    const schoolName = decodedToken?.school_name;
+    const teachers = await fetchAllTeachersEmail(schoolName);
 
   return (
     <main>
