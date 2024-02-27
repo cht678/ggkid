@@ -19,48 +19,48 @@ export default async function ParentsTable({
   let students: any[] = [];
   let combinedData: any[] = []; // Initialize combinedData here
 
-  try {
-    parents = await fetchFilteredParents(query, currentPage, schoolName);
-    parentEmails = parents.map((parent) => parent.email);
-    students = await fetchStudentsByParentsEmail(parentEmails);
-
-    const studentFirstNamesByParentEmail: any[] = [];
-
-    for (const studentEntry of students) {
-      const studentFirstNames: string[] = [];
-
-      for (const studentId of studentEntry.studentIds) {
-        const student = await fetchStudentNameById(studentId);
-        if (student) {
-          studentFirstNames.push(student.name);
-        }
-      }
-
-      studentFirstNamesByParentEmail.push({
-        email: studentEntry.email,
-        student_name: studentFirstNames,
-      });
-    }
-
-    combinedData = parents.map((parent) => {
-      const studentNames =
-        studentFirstNamesByParentEmail.find(
-          (entry) => entry.email === parent.email
-        )?.student_name || [];
-      return {
-        _id: parent._id,
-        email: parent.email,
-        name: `${parent.firstName} ${parent.lastName}`,
-        phoneNum: parent.phoneNum,
-        students: studentNames,
-      };
-    });
-
-    console.log('Combined Data:', combinedData);
-  } catch (error: any) {
-    console.error('Error fetching parents:', error);
-    // You can return an error message or a loading spinner here if needed
-  }
+  // try {
+  //   parents = await fetchFilteredParents(query, currentPage, schoolName);
+  //   parentEmails = parents.map((parent) => parent.email);
+  //   students = await fetchStudentsByParentsEmail(parentEmails);
+  //
+  //   const studentFirstNamesByParentEmail: any[] = [];
+  //
+  //   for (const studentEntry of students) {
+  //     const studentFirstNames: string[] = [];
+  //
+  //     for (const studentId of studentEntry.studentIds) {
+  //       const student = await fetchStudentNameById(studentId);
+  //       if (student) {
+  //         studentFirstNames.push(student.name);
+  //       }
+  //     }
+  //
+  //     studentFirstNamesByParentEmail.push({
+  //       email: studentEntry.email,
+  //       student_name: studentFirstNames,
+  //     });
+  //   }
+  //
+  //   combinedData = parents.map((parent) => {
+  //     const studentNames =
+  //       studentFirstNamesByParentEmail.find(
+  //         (entry) => entry.email === parent.email
+  //       )?.student_name || [];
+  //     return {
+  //       _id: parent._id,
+  //       email: parent.email,
+  //       name: `${parent.firstName} ${parent.lastName}`,
+  //       phoneNum: parent.phoneNum,
+  //       students: studentNames,
+  //     };
+  //   });
+  //
+  //   console.log('Combined Data:', combinedData);
+  // } catch (error: any) {
+  //   console.error('Error fetching parents:', error);
+  //   // You can return an error message or a loading spinner here if needed
+  // }
 
   return (
     <div className="mt-6 flow-root">
