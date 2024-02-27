@@ -182,7 +182,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
     console.log('学生',students)
     return {
       parents,
-      students,
+      students:studentIdsByParentEmail,
     };
   });
 }
