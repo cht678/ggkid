@@ -1,15 +1,19 @@
 import { UpdateClass, DeleteClass } from '@/app/ui/classes/buttons';
 import { fetchFilteredClasses } from '@/app/lib/data';
+import Link from 'next/link';
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, PromiseLikeOfReactNode, Key } from 'react';
 
+interface ClassesTableTrops{
+  query: string;
+  currentPage: number;
+  schoolName: string; // Add schoolName parameter
+}
 export default async function ClassesTable({
   query,
   currentPage,
   schoolName, // Add schoolName parameter
-}: {
-  query: string;
-  currentPage: number;
-  schoolName: string; // Add schoolName parameter
-}) {
+}: ClassesTableTrops){
+
   let classes: any[] = [];
 
   try {

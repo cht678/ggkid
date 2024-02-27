@@ -213,7 +213,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
 
 export async function fetchParentsPages(query: string, schoolName: string) {
   return executeWithRetry(async () => {
-    const client = await connect();
+    const client = await connect();   //链接数据库
     const db = client.db('GoGetKids');
     const studentsCollection = db.collection('students');
     const parentsCollection = db.collection('users');
@@ -231,7 +231,7 @@ export async function fetchParentsPages(query: string, schoolName: string) {
 
     const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
 
-    await client.close();
+    await client.close();   //关闭数据库
     return totalPages;
   });
 }
