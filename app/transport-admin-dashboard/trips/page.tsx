@@ -10,7 +10,7 @@ import { fetchCompanyName, fetchTripsPages } from '@/app/lib/data3';
 import jwt, { JwtPayload } from 'jsonwebtoken'; // Import jwt
 
 export default async function Page({
-  searchParams,
+ searchParams,
 }: {
   searchParams?: {
     query?: string;
@@ -25,7 +25,7 @@ export default async function Page({
   const token = await fetchSessionToken(sessionName);
   console.log('Session token:', token);
 
-  // Verify and decode the token
+  /*// Verify and decode the token
   let decodedToken: JwtPayload | string; // Explicitly type decodedToken
   try {
     decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!);
@@ -41,7 +41,19 @@ export default async function Page({
 
   // Extract company_name from decoded token
   const companyName = await fetchCompanyName(sessionUserId);
-  console.log(companyName);
+  console.log(companyName);*/
+  let decodedToken: JwtPayload | string; // Explicitly type decodedToken
+  try {
+      // Type assertion to assert that token is a non-null string
+      decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
+      console.log('Decoded token data:', decodedToken);
+  } catch (error) {
+      console.error('Error verifying token:', error);
+      // Handle error if token verification fails or token is null
+      return null; // Or handle the error in some other way
+  }
+  // Extract company_name from decoded token
+  const companyName = decodedToken?.company_name;
 
   // Fetch trips pages with the school name
   const totalPages = await fetchTripsPages(query, companyName);
@@ -50,21 +62,21 @@ export default async function Page({
   const totalPagesOrDefault = totalPages ?? 1;
 
   return (
-    <div className="w-full">
-      <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Trips</h1>
+      <div className="w-full">
+        <div className="flex w-full items-center justify-between">
+          <h1 className={`${lusitana.className} text-2xl`}>Trips</h1>
+        </div>
+        <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
+          <Search placeholder="Search trips..." />
+          <CreateTrip />
+          <BulkImportTrips />
+        </div>
+        <Suspense key={query + currentPage} fallback={<DefaultSkeletonTable />}>
+          <Table query={query} currentPage={currentPage} companyName={companyName} />
+        </Suspense>
+        <div className="mt-5 flex w-full justify-center">
+          <Pagination totalPages={totalPagesOrDefault} />
+        </div>
       </div>
-      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Search trips..." />
-        <CreateTrip />
-        <BulkImportTrips />
-      </div>
-      <Suspense key={query + currentPage} fallback={<DefaultSkeletonTable />}>
-        <Table query={query} currentPage={currentPage} companyName={companyName} />
-      </Suspense>
-      <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPagesOrDefault} />
-      </div>
-    </div>
   );
 }
