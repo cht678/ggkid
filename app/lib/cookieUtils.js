@@ -3,6 +3,7 @@ import { parseCookies } from 'nookies';
 async function getTokenFromCookies() {
   try {
     const cookies = parseCookies(); // This will retrieve cookies in a server environment
+    console.log(cookies);
     const token = cookies.token; // Assuming 'token' is the cookie name
     return token;
   } catch (error) {
