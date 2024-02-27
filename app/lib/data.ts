@@ -164,6 +164,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
       .toArray();
 
     await client.close();
+    console.log('家长', parents)
     return parents;
   });
 }

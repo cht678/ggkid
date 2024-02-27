@@ -20,7 +20,9 @@ export default async function ParentsTable({
   let combinedData: any[] = []; // Initialize combinedData here
 
   try {
+    console.log('开始请求家长数据')
     parents = await fetchFilteredParents(query, currentPage, schoolName); // 这里出错了
+    console.log('页面中获取到的家长数据',parents)
     parentEmails = parents.map((parent) => parent.email);
     students = await fetchStudentsByParentsEmail(parentEmails);
 
