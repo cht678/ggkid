@@ -26,6 +26,7 @@ export default async function Page({
   // Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
   const token = await fetchSessionToken(sessionName);
+    console.log(123123)
   console.log('Session token:', token);
 
  /* // Decode the token to get school_name
@@ -66,19 +67,20 @@ export default async function Page({
 
   return (
     <div className="w-full">
-      <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Parents</h1>
-      </div>
-      <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Search parents..." />
-        <CreateParent />
-      </div>
-      <Suspense key={query + currentPage} fallback={<ParentsTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} schoolName={schoolName} />
-      </Suspense>
-      <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPagesOrDefault} />
-      </div>
+        家长野牦牛
+      {/*<div className="flex w-full items-center justify-between">*/}
+      {/*  <h1 className={`${lusitana.className} text-2xl`}>Parents</h1>*/}
+      {/*</div>*/}
+      {/*<div className="mt-4 flex items-center justify-between gap-2 md:mt-8">*/}
+      {/*  <Search placeholder="Search parents..." />*/}
+      {/*  <CreateParent />*/}
+      {/*</div>*/}
+      {/*<Suspense key={query + currentPage} fallback={<ParentsTableSkeleton />}>*/}
+      {/*  <Table query={query} currentPage={currentPage} schoolName={schoolName} />*/}
+      {/*</Suspense>*/}
+      {/*<div className="mt-5 flex w-full justify-center">*/}
+      {/*  <Pagination totalPages={totalPagesOrDefault} />*/}
+      {/*</div>*/}
     </div>
   );
 }
