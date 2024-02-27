@@ -20,11 +20,13 @@ export default async function ParentsTable({
   let combinedData: any[] = []; // Initialize combinedData here
 
   try {
-    parents = await fetchFilteredParents(query, currentPage, schoolName);
-    parentEmails = parents.map((parent) => parent.email);
-    console.log('根据家长邮箱获取学生')
-    students = await fetchStudentsByParentsEmail(parentEmails);
-    console.log('获取的学生数据',students)
+    const {parents:p,students:s} = await fetchFilteredParents(query, currentPage, schoolName);
+    parents = p
+    students= s
+    // parentEmails = parents.map((parent) => parent.email);
+    // console.log('根据家长邮箱获取学生')
+    // students = await fetchStudentsByParentsEmail(parentEmails);
+    // console.log('获取的学生数据',students)
 
     const studentFirstNamesByParentEmail: any[] = [];
 

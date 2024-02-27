@@ -139,7 +139,6 @@ export async function fetchAllStudentIds(schoolName: string) {
 
 export async function fetchFilteredParents(query: string, currentPage: number, schoolName: string) {
   return executeWithRetry(async () => {
-
     const client = await connect();
     const db = client.db('GoGetKids');
     const studentsCollection = db.collection('students');
@@ -149,23 +148,42 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
 
     // Fetch students from the specified school
     const students = await studentsCollection
-      .find({ school_name: schoolName })
-      .toArray();
-    console.log('学生', students)
+        .find({ school_name: schoolName })
+        .toArray();
+
     // Extract parent IDs (emails) from the students
-    const parentIds = students.map(student => student.parent_id);
+    const parentIds = students.map((student) => student.parent_id);
 
     // Fetch parents from the users collection based on parent IDs (emails)
     const parents = await parentsCollection
-      .find({ role: 'parent', email: { $in: parentIds } })
-      .sort({ email: 1 }) // Sort by email in ascending order
-      .skip(offset)
-      .limit(ITEMS_PER_PAGE)
-      .toArray();
+        .find({ role: 'parent', email: { $in: parentIds } })
+        .sort({ email: 1 }) // Sort by email in ascending order
+        .skip(offset)
+        .limit(ITEMS_PER_PAGE)
+        .toArray();
+
+    const parentEmails = parents.map((parent) => parent.email);
+    const studentIdsByParentEmail: any[] = [];
+
+    // Loop through each parent email
+    for (const email of parentEmails) {
+      // Search for students associated with the current parent email
+      const students = await studentsCollection
+          .find({ parent_id: email })
+          .toArray();
+
+      // Extract student IDs and store them for the current parent email
+      const studentIds = students.map((student) => student._id);
+      studentIdsByParentEmail.push({ email, studentIds });
+    }
 
     await client.close();
-    console.log('家长', parents)
-    return parents;
+    console.log('家长',parents)
+    console.log('学生',students)
+    return {
+      parents,
+      students,
+    };
   });
 }
 
@@ -226,11 +244,12 @@ export async function fetchStudentsByParentsEmail(emails: string[]) {
   return executeWithRetry(async () => {
     console.log('开始链接数据库')
     const client = await connect();
+    console.log('链接完成')
     const db = client.db('GoGetKids');
-
+    console.log('获取db成功')
     // Array to store student IDs for each parent email
     const studentIdsByParentEmail: any[] = [];
-console.log('链接完成')
+
     // Loop through each parent email
     for (const email of emails) {
       // Search for students associated with the current parent email
