@@ -6,8 +6,9 @@ import { lusitana } from '@/app/ui/fonts';
 import { VehiclesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { fetchSessionToken } from '@/app/lib/data';
-import { fetchCompanyName, fetchVehiclesPages } from '@/app/lib/data3';
 import jwt, { JwtPayload } from 'jsonwebtoken'; // Import jwt
+import { fetchCompanyName, fetchVehiclesPages } from '@/app/lib/data3';
+
 
 export default async function Page({
   searchParams,
@@ -25,7 +26,7 @@ export default async function Page({
   const token = await fetchSessionToken(sessionName);
   console.log('Session token:', token);
 
-  // Verify and decode the token
+  /*// Verify and decode the token
   let decodedToken: JwtPayload | string; // Explicitly type decodedToken
   try {
     decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!);
@@ -41,7 +42,20 @@ export default async function Page({
 
   // Extract company_name from decoded token
   const companyName = await fetchCompanyName(sessionUserId);
-  console.log(companyName);
+  console.log(companyName);*/
+  let decodedToken: JwtPayload | string; // Explicitly type decodedToken
+  try {
+    // Type assertion to assert that token is a non-null string
+    decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
+    console.log('Decoded token data:', decodedToken);
+  } catch (error) {
+    console.error('Error verifying token:', error);
+    // Handle error if token verification fails or token is null
+    return null; // Or handle the error in some other way
+  }
+
+  // Extract company_name from decoded token
+  const companyName = decodedToken?.company_name;
 
   // Fetch vehicles pages with the school name
   const totalPages = await fetchVehiclesPages(query, companyName);
