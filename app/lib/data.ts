@@ -177,12 +177,36 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
       studentIdsByParentEmail.push({ email, studentIds });
     }
 
+    const studentFirstNamesByParentEmail: any[] = [];
+    for (const studentEntry of studentIdsByParentEmail) {
+      const studentFirstNames: string[] = [];
+
+      for (const studentId of studentEntry.studentIds) {
+        const student = await studentsCollection.findOne(
+            { _id: studentId },
+            {
+              projection: {
+                _id: 0,
+                name: { $concat: ['$firstname', ' ', '$lastname'] },
+              },
+            },
+        );
+        if (student) {
+          studentFirstNames.push(student.name);
+        }
+      }
+
+      studentFirstNamesByParentEmail.push({
+        email: studentEntry.email,
+        student_name: studentFirstNames,
+      });
+    }
+
     await client.close();
-    console.log('家长',parents)
-    console.log('学生',students)
     return {
       parents,
-      students:studentIdsByParentEmail,
+      studentFirstNamesByParentEmail,
+      students: studentIdsByParentEmail,
     };
   });
 }

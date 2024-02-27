@@ -20,34 +20,33 @@ export default async function ParentsTable({
   let combinedData: any[] = []; // Initialize combinedData here
 
   try {
-    const {parents:p,students:s} = await fetchFilteredParents(query, currentPage, schoolName);
+    const {parents:p,studentFirstNamesByParentEmail} = await fetchFilteredParents(query, currentPage, schoolName);
     parents = p
-    students= s
     // parentEmails = parents.map((parent) => parent.email);
     // console.log('根据家长邮箱获取学生')
     // students = await fetchStudentsByParentsEmail(parentEmails);
     // console.log('获取的学生数据',students)
 
-    const studentFirstNamesByParentEmail: any[] = [];
+    // const studentFirstNamesByParentEmail: any[] = [];
 
-    for (const studentEntry of students) {
-      const studentFirstNames: string[] = [];
-
-      for (const studentId of studentEntry.studentIds) {
-        console.log('根据学生ID获取学生')
-        const student = await fetchStudentNameById(studentId);
-        console.log('学生信息',student)
-
-        if (student) {
-          studentFirstNames.push(student.name);
-        }
-      }
-
-      studentFirstNamesByParentEmail.push({
-        email: studentEntry.email,
-        student_name: studentFirstNames,
-      });
-    }
+    // for (const studentEntry of students) {
+    //   const studentFirstNames: string[] = [];
+    //
+    //   for (const studentId of studentEntry.studentIds) {
+    //     console.log('根据学生ID获取学生')
+    //     const student = await fetchStudentNameById(studentId);
+    //     console.log('学生信息',student)
+    //
+    //     if (student) {
+    //       studentFirstNames.push(student.name);
+    //     }
+    //   }
+    //
+    //   studentFirstNamesByParentEmail.push({
+    //     email: studentEntry.email,
+    //     student_name: studentFirstNames,
+    //   });
+    // }
 
     combinedData = parents.map((parent) => {
       const studentNames =
