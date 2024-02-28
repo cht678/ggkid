@@ -48,23 +48,23 @@ export default function Form({ drivers, vehicles }: Props) {
           <label htmlFor="driver_email" className="mb-2 block text-sm font-medium">
             Driver Email
           </label>
-          <div className="relative mt-2 rounded-md">
-            <select
-              id="driver_email"
-              name="driver_email"
-              value={selectedDriver}
-              onChange={handleDriverSelectChange}
-              className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 mt-1"
-              required
-            >
-              <option value="" disabled>Select Driver Email</option>
-              {drivers.map((driverEmail, index) => (
-                <option key={index} value={driverEmail}>
-                  {driverEmail}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/*<div className="relative mt-2 rounded-md">*/}
+          {/*  <select*/}
+          {/*    id="driver_email"*/}
+          {/*    name="driver_email"*/}
+          {/*    value={selectedDriver}*/}
+          {/*    onChange={handleDriverSelectChange}*/}
+          {/*    className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 mt-1"*/}
+          {/*    required*/}
+          {/*  >*/}
+          {/*    <option value="" disabled>Select Driver Email</option>*/}
+          {/*    {drivers.map((driverEmail, index) => (*/}
+          {/*      <option key={index} value={driverEmail}>*/}
+          {/*        {driverEmail}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </select>*/}
+          {/*</div>*/}
         </div>
   
         {/* Vehicle Number Dropdown */}
@@ -72,23 +72,23 @@ export default function Form({ drivers, vehicles }: Props) {
           <label htmlFor="vehicle_number" className="mb-2 block text-sm font-medium">
             Vehicle Number
           </label>
-          <div className="relative mt-2 rounded-md">
-            <select
-              id="vehicle_number"
-              name="vehicle_number"
-              value={selectedVehicle}
-              onChange={handleVehicleSelectChange}
-              className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 mt-1"
-              required
-            >
-              <option value="" disabled>Select Vehicle Number</option>
-              {vehicles.map((vehicleNumber, index) => (
-                <option key={index} value={vehicleNumber}>
-                  {vehicleNumber}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/*<div className="relative mt-2 rounded-md">*/}
+          {/*  <select*/}
+          {/*    id="vehicle_number"*/}
+          {/*    name="vehicle_number"*/}
+          {/*    value={selectedVehicle}*/}
+          {/*    onChange={handleVehicleSelectChange}*/}
+          {/*    className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 mt-1"*/}
+          {/*    required*/}
+          {/*  >*/}
+          {/*    <option value="" disabled>Select Vehicle Number</option>*/}
+          {/*    {vehicles.map((vehicleNumber, index) => (*/}
+          {/*      <option key={index} value={vehicleNumber}>*/}
+          {/*        {vehicleNumber}*/}
+          {/*      </option>*/}
+          {/*    ))}*/}
+          {/*  </select>*/}
+          {/*</div>*/}
         </div>
   
         {/* School Name */}
