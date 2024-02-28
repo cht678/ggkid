@@ -7,16 +7,16 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 export default async function Page() {
   //Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
-    console.log('获取token')
+    console.log('huoqu token33333333333333333333333333333333')
   const token = await fetchSessionToken(sessionName);
-  console.log('Session token:', token);
+  console.log('Session token111111111111111111111111111111111111:', token);
     console.log('获取token陈工',token)
   // Verify and decode the token
   let decodedToken: JwtPayload | string; // Explicitly type decodedToken
   try {
     // Type assertion to assert that token is a non-null string
     decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
-    console.log('Decoded token data:', decodedToken);
+    console.log('Decoded token data22222222222222222222222222222:', decodedToken);
   } catch (error) {
     console.error('Error verifying token:', error);
     // Handle error if token verification fails or token is null
