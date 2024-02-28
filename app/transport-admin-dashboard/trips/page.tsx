@@ -60,7 +60,6 @@ export default async function Page({
 
   // Handle the case where totalPages is undefined
   const totalPagesOrDefault = totalPages ?? 1;
-    console.error('trip列表')
   return (
       <div className="w-full">
         <div className="flex w-full items-center justify-between">
