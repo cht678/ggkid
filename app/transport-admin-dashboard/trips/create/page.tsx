@@ -7,10 +7,8 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 export default async function Page() {
   //Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
-    console.log('huoqu token33333333333333333333333333333333')
   const token = await fetchSessionToken(sessionName);
-  console.log('Session token111111111111111111111111111111111111:', token);
-    console.log('获取token陈工',token)
+  console.log('Session token:', token);
   // Verify and decode the token
   let decodedToken: JwtPayload | string; // Explicitly type decodedToken
   try {
