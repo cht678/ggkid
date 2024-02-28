@@ -155,6 +155,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
 
     // Extract parent IDs (emails) from the students
     const parentIds = students.map((student) => student.parent_id);
+    console.log(3333)
 
     // Fetch parents from the users collection based on parent IDs (emails)
     const parents = await parentsCollection
@@ -166,6 +167,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
 
     const parentEmails = parents.map((parent) => parent.email);
     const studentIdsByParentEmail: any[] = [];
+    console.log(44444)
 
     // Loop through each parent email
     for (const email of parentEmails) {
@@ -178,7 +180,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
       const studentIds = students.map((student) => student._id);
       studentIdsByParentEmail.push({ email, studentIds });
     }
-
+    console.log(5555)
     const studentFirstNamesByParentEmail: any[] = [];
     for (const studentEntry of studentIdsByParentEmail) {
       const studentFirstNames: string[] = [];
@@ -197,6 +199,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
           studentFirstNames.push(student.name);
         }
       }
+      console.log(6666)
 
       studentFirstNamesByParentEmail.push({
         email: studentEntry.email,
@@ -205,6 +208,7 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
     }
 
     await client.close();   //关闭数据库
+    console.log(77777)
     return {
       parents,
       studentFirstNamesByParentEmail,
