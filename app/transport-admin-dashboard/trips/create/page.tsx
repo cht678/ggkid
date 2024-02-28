@@ -21,8 +21,12 @@ export default async function Page() {
     // Handle error if token verification fails or token is null
     return null; // Or handle the error in some other way
   }
+
     const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
-  const {vehicles,drivers} = await fetchDataForCreateTrips(sessionUserId)
+    console.log('sessionUserId值：',sessionUserId)
+    console.log('开始调用fetchDataForCreateTrips')
+    const {vehicles,drivers} = await fetchDataForCreateTrips(sessionUserId)
+    console.log('fetchDataForCreateTrips调用成功',vehicles,drivers)
   //
   // // Extract user ID from decoded token
   // const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
