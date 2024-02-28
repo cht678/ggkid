@@ -3,23 +3,28 @@ import Breadcrumbs from '@/app/ui/trips/breadcrumbs';
 import {fetchAllDriversEmails, fetchAllVehicleIds, fetchCompanyName, fetchDataForCreateTrips} from '@/app/lib/data3';
 import { fetchSessionToken } from '@/app/lib/data';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { useRouter } from 'next/router';
+
 
 export default async function Page() {
-  //Fetch session token
-  const sessionName = 'currentSession'; // Adjust session name according to your setup
-  const token = await fetchSessionToken(sessionName);
-  console.log('Session token:', token);
-  // Verify and decode the token
-  let decodedToken: JwtPayload | string; // Explicitly type decodedToken
-  try {
-    // Type assertion to assert that token is a non-null string
-    decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
-    console.log('Decoded token data22222222222222222222222222222:', decodedToken);
-  } catch (error) {
-    console.error('Error verifying token:', error);
-    // Handle error if token verification fails or token is null
-    return null; // Or handle the error in some other way
-  }
+  // //Fetch session token
+  // const sessionName = 'currentSession'; // Adjust session name according to your setup
+  // const token = await fetchSessionToken(sessionName);
+  // console.log('Session token:', token);
+  // // Verify and decode the token
+  // let decodedToken: JwtPayload | string; // Explicitly type decodedToken
+  // try {
+  //   // Type assertion to assert that token is a non-null string
+  //   decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
+  //   console.log('Decoded token data22222222222222222222222222222:', decodedToken);
+  // } catch (error) {
+  //   console.error('Error verifying token:', error);
+  //   // Handle error if token verification fails or token is null
+  //   return null; // Or handle the error in some other way
+  // }
+  const router = useRouter();
+  const { decodedToken }: any = router.query;
+
     console.log('token解析陈工',decodedToken)
     const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
     console.log('sessionUserId值：',sessionUserId)
@@ -53,7 +58,7 @@ console.error('你好好你好好你好好你好好')
           },
         ]}
       />
-        sessionUserId: {sessionUserId}
+        最新的sessionUserId: {sessionUserId}
       {/*<Form drivers={drivers} vehicles={vehicles} />*/}
     </main>
   );

@@ -67,7 +67,7 @@ export default async function Page({
         </div>
         <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
           <Search placeholder="Search trips..." />
-          <CreateTrip />
+          <CreateTrip decodedToken={decodedToken}/>
           <BulkImportTrips />
         </div>
         <Suspense key={query + currentPage} fallback={<DefaultSkeletonTable />}>
