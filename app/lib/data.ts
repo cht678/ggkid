@@ -213,11 +213,13 @@ export async function fetchFilteredParents(query: string, currentPage: number, s
 
 export async function fetchParentsPages(query: string, schoolName: string) {
   return executeWithRetry(async () => {
+    console.log(789)
     const client = await connect();   //链接数据库
     const db = client.db('GoGetKids');
     const studentsCollection = db.collection('students');
     const parentsCollection = db.collection('users');
 
+    console.log(10086)
     // Fetch students from the specified schoolf
     const students = await studentsCollection
       .find({ school_name: schoolName })

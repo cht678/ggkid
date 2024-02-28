@@ -60,6 +60,7 @@ export default async function Page({
     const schoolName = decodedToken?.school_name;
 
     // Fetch classes pages with the school name
+    console.log(456456)
     const totalPages = await fetchParentsPages(query, schoolName);
 
     // Handle the case where totalPages is undefined
