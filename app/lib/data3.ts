@@ -2,6 +2,7 @@ import { object } from 'zod';
 import { connect, disconnect } from './dbConfig';
 import { Db, ObjectId } from 'mongodb';
 import { fetchSessionToken } from './data';
+import jwt, {JwtPayload} from "jsonwebtoken";
 
 const ITEMS_PER_PAGE = 6;
 const MAX_RETRIES = 10;
@@ -209,6 +210,54 @@ export async function fetchAllVehicleIds(companyName: string) {
 
     await client.close();
     return vehicleIds.map(vehicle => vehicle.vehicleId); // Adjust according to the actual field name in your documents
+  });
+}
+
+export async function fetchDataForCreateTrips() {
+  return executeWithRetry(async () => {
+    const client = await connect();
+
+    const sessionName = 'currentSession'; // Adjust session name according to your setup
+    const db = client.db('GoGetKids');
+    const session = await db.collection('sessions').findOne({ sessionName });
+    const token = session?.token;
+
+    let decodedToken: JwtPayload | string; // Explicitly type decodedToken
+    decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
+    console.log('Decoded token data:', decodedToken);
+
+    // Extract user ID from decoded token
+    const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
+
+    // Fetch the company name using the user ID
+    const objectId = new ObjectId(sessionUserId);
+    const adminUser = await db.collection('adminusers').findOne(
+        { _id: objectId }, // Query
+        { projection: { company_name: 1 } } // Projection to only include the 'company_name' field
+    );
+    const companyName = adminUser?.company_name;
+    console.log('Company Name:', companyName);
+
+    // Fetch drivers' emails filtered by the company name
+    const driversCollection = db.collection('users');
+    const driversEmails = await driversCollection
+        .find({ role: 'driver', company_name: companyName }) // Include company_name in the query
+        .project({ _id: 0, email: 1 })
+        .toArray();
+    const drivers = driversEmails.map(driver => driver.email);
+
+    // Fetch all vehicle IDs
+    const vehiclesCollection = db.collection('vehicles');
+    const vehicleIds = await vehiclesCollection
+        .find({ company_name: companyName })
+        .project({ _id: 0, vehicleId: 1 })
+        .toArray();
+    const vehicles = vehicleIds.map(vehicle => vehicle.vehicleId);
+
+    return {
+      drivers,
+      vehicles
+    }
   });
 }
 
