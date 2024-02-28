@@ -139,10 +139,12 @@ export async function fetchAllStudentIds(schoolName: string) {
 
 export async function fetchFilteredParents(query: string, currentPage: number, schoolName: string) {
   return executeWithRetry(async () => {
+    console.log(11111)
     const client = await connect();   //链接数据库
     const db = client.db('GoGetKids');
     const studentsCollection = db.collection('students');
     const parentsCollection = db.collection('users');
+    console.log(2222)
 
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
