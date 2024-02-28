@@ -5,23 +5,24 @@ import { fetchSessionToken } from '@/app/lib/data';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export default async function Page() {
-   const {vehicles,drivers} = await fetchDataForCreateTrips(jwt)
-  // Fetch session token
-  // const sessionName = 'currentSession'; // Adjust session name according to your setup
-  // const token = await fetchSessionToken(sessionName);
-  // console.log('Session token:', token);
-  //
-  // // Verify and decode the token
-  // let decodedToken: JwtPayload | string; // Explicitly type decodedToken
-  // try {
-  //   // Type assertion to assert that token is a non-null string
-  //   decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
-  //   console.log('Decoded token data:', decodedToken);
-  // } catch (error) {
-  //   console.error('Error verifying token:', error);
-  //   // Handle error if token verification fails or token is null
-  //   return null; // Or handle the error in some other way
-  // }
+  //Fetch session token
+  const sessionName = 'currentSession'; // Adjust session name according to your setup
+  const token = await fetchSessionToken(sessionName);
+  console.log('Session token:', token);
+
+  // Verify and decode the token
+  let decodedToken: JwtPayload | string; // Explicitly type decodedToken
+  try {
+    // Type assertion to assert that token is a non-null string
+    decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
+    console.log('Decoded token data:', decodedToken);
+  } catch (error) {
+    console.error('Error verifying token:', error);
+    // Handle error if token verification fails or token is null
+    return null; // Or handle the error in some other way
+  }
+    const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
+  const {vehicles,drivers} = await fetchDataForCreateTrips(sessionUserId)
   //
   // // Extract user ID from decoded token
   // const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;

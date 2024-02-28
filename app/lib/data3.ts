@@ -213,21 +213,21 @@ export async function fetchAllVehicleIds(companyName: string) {
   });
 }
 
-export async function fetchDataForCreateTrips(jwtProvide:any) {
+export async function fetchDataForCreateTrips(sessionUserId:any) {
   return executeWithRetry(async () => {
     const client = await connect();
-
-    const sessionName = 'currentSession'; // Adjust session name according to your setup
     const db = client.db('GoGetKids');
-    const session = await db.collection('sessions').findOne({ sessionName });
-    const token = session?.token;
 
-    let decodedToken: JwtPayload | string; // Explicitly type decodedToken
-    decodedToken = jwtProvide.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
-    console.log('Decoded token data:', decodedToken);
+    // const sessionName = 'currentSession'; // Adjust session name according to your setup
+    // const session = await db.collection('sessions').findOne({ sessionName });
+    // const token = session?.token;
+    //
+    // let decodedToken: JwtPayload | string; // Explicitly type decodedToken
+    // decodedToken = jwtProvide.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
+    // console.log('Decoded token data:', decodedToken);
 
     // Extract user ID from decoded token
-    const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
+    // const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
 
     // Fetch the company name using the user ID
     const objectId = new ObjectId(sessionUserId);
