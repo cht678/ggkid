@@ -7,9 +7,10 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 export default async function Page() {
   //Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
+    console.log('获取token')
   const token = await fetchSessionToken(sessionName);
   console.log('Session token:', token);
-
+    console.log('获取token陈工',token)
   // Verify and decode the token
   let decodedToken: JwtPayload | string; // Explicitly type decodedToken
   try {
@@ -21,7 +22,7 @@ export default async function Page() {
     // Handle error if token verification fails or token is null
     return null; // Or handle the error in some other way
   }
-
+    console.log('token解析陈工',decodedToken)
     const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
     console.log('sessionUserId值：',sessionUserId)
     console.log('开始调用fetchDataForCreateTrips')
