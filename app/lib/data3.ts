@@ -254,6 +254,7 @@ export async function fetchDataForCreateTrips() {
         .toArray();
     const vehicles = vehicleIds.map(vehicle => vehicle.vehicleId);
 
+    await client.close();
     return {
       drivers,
       vehicles
