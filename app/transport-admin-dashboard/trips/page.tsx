@@ -60,6 +60,7 @@ export default async function Page({
 
   // Handle the case where totalPages is undefined
   const totalPagesOrDefault = totalPages ?? 1;
+
   return (
       <div className="w-full">
         <div className="flex w-full items-center justify-between">
@@ -67,7 +68,7 @@ export default async function Page({
         </div>
         <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
           <Search placeholder="Search trips..." />
-          <CreateTrip decodedToken={decodedToken}/>
+          <CreateTrip />
           <BulkImportTrips />
         </div>
         <Suspense key={query + currentPage} fallback={<DefaultSkeletonTable />}>

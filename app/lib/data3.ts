@@ -2,7 +2,6 @@ import { object } from 'zod';
 import { connect, disconnect } from './dbConfig';
 import { Db, ObjectId } from 'mongodb';
 import { fetchSessionToken } from './data';
-import  {JwtPayload} from "jsonwebtoken";
 
 const ITEMS_PER_PAGE = 6;
 const MAX_RETRIES = 10;
@@ -43,9 +42,16 @@ export async function fetchFilteredVehicles(query: string, currentPage: number, 
       .limit(ITEMS_PER_PAGE)
       .toArray();
 
+
+    const vehicleIds = vehicles.map((vehicle)=>vehicle.vehicleId);
+    /*const parentEmails = parents.map((parent) => parent.email);
+    const studentIdsByParentEmail: any[] = [];*/
+
+
+
+
     await client.close();
     return vehicles;
-
   });
 }
 
@@ -213,54 +219,6 @@ export async function fetchAllVehicleIds(companyName: string) {
   });
 }
 
-export async function fetchDataForCreateTrips(sessionUserId:any) {
-  return executeWithRetry(async () => {
-    const client = await connect();
-    const db = client.db('GoGetKids');
-
-    // const sessionName = 'currentSession'; // Adjust session name according to your setup
-    // const session = await db.collection('sessions').findOne({ sessionName });
-    // const token = session?.token;
-    //
-    // let decodedToken: JwtPayload | string; // Explicitly type decodedToken
-    // decodedToken = jwtProvide.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
-    // console.log('Decoded token data:', decodedToken);
-
-    // Extract user ID from decoded token
-    // const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
-
-    // Fetch the company name using the user ID
-    const objectId = new ObjectId(sessionUserId);
-    const adminUser = await db.collection('adminusers').findOne(
-        { _id: objectId }, // Query
-        { projection: { company_name: 1 } } // Projection to only include the 'company_name' field
-    );
-    const companyName = adminUser?.company_name;
-    console.log('Company Name:', companyName);
-
-    // Fetch drivers' emails filtered by the company name
-    const driversCollection = db.collection('users');
-    const driversEmails = await driversCollection
-        .find({ role: 'driver', company_name: companyName }) // Include company_name in the query
-        .project({ _id: 0, email: 1 })
-        .toArray();
-    const drivers = driversEmails.map(driver => driver.email);
-
-    // Fetch all vehicle IDs
-    const vehiclesCollection = db.collection('vehicles');
-    const vehicleIds = await vehiclesCollection
-        .find({ company_name: companyName })
-        .project({ _id: 0, vehicleId: 1 })
-        .toArray();
-    const vehicles = vehicleIds.map(vehicle => vehicle.vehicleId);
-
-    await client.close();
-    return {
-      drivers,
-      vehicles
-    }
-  });
-}
 
 export async function fetchTripById(id: ObjectId) {
   return executeWithRetry(async () => {

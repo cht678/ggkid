@@ -15,6 +15,7 @@ export default function Form({ drivers, vehicles }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDriver, setSelectedDriver] = useState('');
   const [selectedVehicle, setSelectedVehicle] = useState('');
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
