@@ -2,7 +2,7 @@ import { object } from 'zod';
 import { connect, disconnect } from './dbConfig';
 import { Db, ObjectId } from 'mongodb';
 import { fetchSessionToken } from './data';
-import jwt, {JwtPayload} from "jsonwebtoken";
+import  {JwtPayload} from "jsonwebtoken";
 
 const ITEMS_PER_PAGE = 6;
 const MAX_RETRIES = 10;
@@ -261,7 +261,6 @@ export async function fetchDataForCreateTrips(jwtProvide:any) {
     }
   });
 }
-
 
 export async function fetchTripById(id: ObjectId) {
   return executeWithRetry(async () => {
