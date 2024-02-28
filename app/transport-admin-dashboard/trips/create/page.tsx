@@ -41,7 +41,7 @@ export default async function Page() {
   // //
   // // // Fetch all vehicle IDs
   // // const vehicles = await fetchAllVehicleIds(companyName);
-console.log('你好好你好好你好好你好好')
+console.error('你好好你好好你好好你好好')
   return (
     <main>
       <Breadcrumbs
