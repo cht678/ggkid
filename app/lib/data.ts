@@ -236,6 +236,7 @@ export async function fetchParentsPages(query: string, schoolName: string) {
     const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
 
     await client.close();   //关闭数据库
+    console.log(199022)
     return totalPages;
   });
 }

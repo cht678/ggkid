@@ -20,6 +20,7 @@ export default async function ParentsTable({
   let combinedData: any[] = []; // Initialize combinedData here
 
   try {
+    console.log(23149)
     const {parents:p,studentFirstNamesByParentEmail} = await fetchFilteredParents(query, currentPage, schoolName); // 这里链接了一次数据库
     parents = p
     // parentEmails = parents.map((parent) => parent.email);
