@@ -1,11 +1,14 @@
 import Form from '@/app/ui/trips/create-form';
 import Breadcrumbs from '@/app/ui/trips/breadcrumbs';
-import { fetchAllDriversEmails, fetchAllVehicleIds, fetchCompanyName,fetchDataForCreateTrips } from '@/app/lib/data3';
-import { fetchSessionToken } from '@/app/lib/data';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import { fetchDataForCreateTrips } from '@/app/lib/data3';
+
+// import { fetchAllDriversEmails, fetchAllVehicleIds, fetchCompanyName } from '@/app/lib/data3';
+// import { fetchSessionToken } from '@/app/lib/data';
+import jwt from 'jsonwebtoken';
+// import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export default async function Page() {
-    const {drivers,vehicles}  = await fetchDataForCreateTrips()
+    const {drivers,vehicles}  = await fetchDataForCreateTrips(jwt)
   // Fetch session token
   // const sessionName = 'currentSession'; // Adjust session name according to your setup
   //   const token = await fetchSessionToken(sessionName);

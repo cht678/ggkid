@@ -213,7 +213,7 @@ export async function fetchAllVehicleIds(companyName: string) {
   });
 }
 
-export async function fetchDataForCreateTrips() {
+export async function fetchDataForCreateTrips(jwtProvide:any) {
   return executeWithRetry(async () => {
     const client = await connect();
 
@@ -223,7 +223,7 @@ export async function fetchDataForCreateTrips() {
     const token = session?.token;
 
     let decodedToken: JwtPayload | string; // Explicitly type decodedToken
-    decodedToken = jwt.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
+    decodedToken = jwtProvide.verify(token!, process.env.TOKEN_SECRET!) as JwtPayload;
     console.log('Decoded token data:', decodedToken);
 
     // Extract user ID from decoded token
