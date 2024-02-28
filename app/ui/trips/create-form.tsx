@@ -68,7 +68,7 @@ export default function Form({ drivers, vehicles }: Props) {
         </div>
 
         {/* Vehicle Number Dropdown */}
-    {/*    <div className="mb-4">
+        <div className="mb-4">
           <label htmlFor="vehicle_number" className="mb-2 block text-sm font-medium">
             Vehicle Number
           </label>
@@ -89,7 +89,7 @@ export default function Form({ drivers, vehicles }: Props) {
               ))}
             </select>
           </div>
-        </div>*/}
+        </div>
 
         {/* School Name */}
         <div className="mb-4">
