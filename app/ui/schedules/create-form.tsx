@@ -6,9 +6,6 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { createSchedule } from '@/app/lib/actions'; // Import the function for creating a schedule
 
-interface Props {
-  students: string[]; // Define the type of the students prop
-}
 
 export default function Form() {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,30 +36,21 @@ export default function Form() {
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
 
         {/* Student ID Dropdown */}
-        {/*<div className="mb-4">
+        <div className="mb-4">
           <label htmlFor="studentid" className="mb-2 block text-sm font-medium">
             Student ID
           </label>
           <div className="relative mt-2 rounded-md">
-            <select
-              id="studentid"
-              name="studentid"
-              value={selectedStudent}
-              onChange={handleSelectChange}
-              className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 mt-1"
-            >
-              <option value="" disabled>Select Student ID</option>
-              {students
-                .slice() // create a copy of the array before sorting
-                .sort((a, b) => parseInt(a) - parseInt(b)) // sort the array numerically in ascending order
-                .map((studentId, index) => (
-                  <option key={index} value={studentId}>
-                    {studentId}
-                  </option>
-                ))}
-            </select>
+            <input
+                id="studentid"
+                name="studentid"
+                type="studentid"
+                placeholder="Enter Student ID"
+                className="peer block w-full rounded-md border border-gray-200 py-2 px-3 text-sm outline-2 placeholder:text-gray-500"
+                required
+            />
           </div>
-        </div>*/}
+        </div>
 
         {/* Date */}
         <div className="mb-4">

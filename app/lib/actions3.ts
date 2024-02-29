@@ -472,8 +472,8 @@ export async function createTrip(formData: FormData): Promise<{ success: boolean
 
     // Validate form data using Zod schema
     const validatedData = tripSchema.parse({
-      //vehicle_number: formData.get('vehicle_number'),
-      //driver_email: formData.get('driver_email'),
+      vehicle_number: formData.get('vehicle_number'),
+      driver_email: formData.get('driver_email'),
       school_name: formData.get('school_name'),
       zone: formData.get('zone'), // Correctly retrieve 'zone' from formData
       start_time: formData.get('start_time'),
