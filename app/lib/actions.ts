@@ -682,13 +682,16 @@ export async function deleteClass(id: string) {
   let client;
   try {
     // Convert id to ObjectId
+    console.log(11111)
     const objectId = new ObjectId(id);
 
     client = await connect();
     const db = client.db('GoGetKids');
+    console.log(22222)
 
     // Delete the class from the MongoDB collection
     const result = await db.collection('classes').deleteOne({ _id: objectId });
+    console.log(3333)
 
     // Check if the deletion was successful
     if (result.deletedCount === 1) {
@@ -711,6 +714,7 @@ export async function deleteClass(id: string) {
     if (client) {
       await client.close();
       console.log('MongoDB connection closed');
+      console.log(4444)
     }
   }
 }
