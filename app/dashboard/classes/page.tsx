@@ -48,6 +48,7 @@ export default async function Page({
 
   // Handle the case where totalPages is undefined
   const totalPagesOrDefault = totalPages ?? 1;
+  console.log(55555)
 
   return (
     <div className="w-full">
