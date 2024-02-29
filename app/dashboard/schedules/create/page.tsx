@@ -5,7 +5,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export default async function Page() {
 
-  // Fetch session token
+  /*// Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
   const token = await fetchSessionToken(sessionName);
   console.log('Session token:', token);
@@ -29,7 +29,7 @@ export default async function Page() {
   const schoolName = await fetchSchoolName(sessionUserId);
   console.log('Company Name:', schoolName);
 
-  const students = await fetchAllStudentIds(schoolName);
+  const students = await fetchAllStudentIds(schoolName);*/
 
   return (
     <main>
@@ -43,7 +43,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form students={students} />
+      <Form />
     </main>
   );
 }

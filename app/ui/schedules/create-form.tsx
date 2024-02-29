@@ -10,7 +10,7 @@ interface Props {
   students: string[]; // Define the type of the students prop
 }
 
-export default function Form({ students }: Props) {
+export default function Form() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState('');
 
@@ -39,7 +39,7 @@ export default function Form({ students }: Props) {
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
 
         {/* Student ID Dropdown */}
-        <div className="mb-4">
+        {/*<div className="mb-4">
           <label htmlFor="studentid" className="mb-2 block text-sm font-medium">
             Student ID
           </label>
@@ -62,7 +62,7 @@ export default function Form({ students }: Props) {
                 ))}
             </select>
           </div>
-        </div>
+        </div>*/}
 
         {/* Date */}
         <div className="mb-4">

@@ -5,7 +5,7 @@ import { fetchSessionToken } from '@/app/lib/data';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export default async function Page() {
-  // Fetch session token
+  /*// Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
   const token = await fetchSessionToken(sessionName);
   console.log('Session token:', token);
@@ -33,7 +33,7 @@ export default async function Page() {
   const drivers = await fetchAllDriversEmails(companyName);
 
   // Fetch all vehicle IDs
-  const vehicles = await fetchAllVehicleIds(companyName);
+  const vehicles = await fetchAllVehicleIds(companyName);*/
 
   return (
       <main>
@@ -47,7 +47,7 @@ export default async function Page() {
               },
             ]}
         />
-        <Form drivers={drivers} vehicles={vehicles} />
+        <Form />
       </main>
   );
 }

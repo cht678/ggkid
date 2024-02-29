@@ -11,7 +11,7 @@ interface Props {
   vehicles: string[]; // Define the type of the vehicles prop
 }
 
-export default function Form({ drivers, vehicles }: Props) {
+export default function Form() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedDriver, setSelectedDriver] = useState('');
   const [selectedVehicle, setSelectedVehicle] = useState('');
@@ -44,7 +44,7 @@ export default function Form({ drivers, vehicles }: Props) {
     <form onSubmit={handleSubmit}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Driver Email Dropdown */}
-        <div className="mb-4">
+        {/*<div className="mb-4">
           <label htmlFor="driver_email" className="mb-2 block text-sm font-medium">
             Driver Email
           </label>
@@ -65,10 +65,10 @@ export default function Form({ drivers, vehicles }: Props) {
               ))}
             </select>
           </div>
-        </div>
+        </div>*/}
 
         {/* Vehicle Number Dropdown */}
-        <div className="mb-4">
+        {/*<div className="mb-4">
           <label htmlFor="vehicle_number" className="mb-2 block text-sm font-medium">
             Vehicle Number
           </label>
@@ -89,7 +89,7 @@ export default function Form({ drivers, vehicles }: Props) {
               ))}
             </select>
           </div>
-        </div>
+        </div>*/}
 
         {/* School Name */}
         <div className="mb-4">
