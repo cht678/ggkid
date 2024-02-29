@@ -367,9 +367,11 @@ export async function fetchTeacherById(id: ObjectId) {
 // ---------------------------------------------- CLASSES -----------------------------------------------
 export async function fetchFilteredClasses(query: string, currentPage: number, schoolName: string) {
   return executeWithRetry(async () => {
+    console.log(123123)
     const client = await connect();
     const db = client.db('GoGetKids');
     const classesCollection = db.collection('classes');
+    console.log(456456)
 
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
     const students = await classesCollection
@@ -386,6 +388,7 @@ export async function fetchFilteredClasses(query: string, currentPage: number, s
 
 export async function fetchClassesPages(query: string, schoolName: string) {
   return executeWithRetry(async () => {
+    console.log(789789)
     const client = await connect();
     const db = client.db('GoGetKids');
     const classesCollection = db.collection('classes');
@@ -394,6 +397,7 @@ export async function fetchClassesPages(query: string, schoolName: string) {
 
     const totalPages = Math.ceil(count / ITEMS_PER_PAGE);
     await client.close();
+    console.log(89108910)
     return totalPages;
   });
 }
