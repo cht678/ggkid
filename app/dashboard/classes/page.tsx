@@ -26,6 +26,7 @@ export default async function Page({
   // Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
   const token = await fetchSessionToken(sessionName);
+  console.log(6666)
   console.log('Session token:', token);
 
   // Verify and decode the token
@@ -43,6 +44,7 @@ export default async function Page({
   // Extract school_name from decoded token
   const schoolName = decodedToken?.school_name;
 
+  console.log(77777)
   // Fetch classes pages with the school name
   const totalPages = await fetchClassesPages(query, schoolName);
 
