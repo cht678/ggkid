@@ -10,7 +10,7 @@ interface Props {
   teachers: string[]; // Define the type of the teachers prop
 }
 
-export default function Form({ teachers }: Props) {
+export default function Form() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,7 +68,7 @@ export default function Form({ teachers }: Props) {
         </div>
 
         {/* Teacher's Email */}
-        <div className="mb-4">
+        {/*<div className="mb-4">
           <label htmlFor="teacher_email" className="mb-2 block text-sm font-medium">
             Teacher Email
           </label>
@@ -87,7 +87,7 @@ export default function Form({ teachers }: Props) {
               ))}
             </select>
           </div>
-        </div>
+        </div>*/}
 
       </div>
       <div className="mt-6 flex justify-end gap-4">

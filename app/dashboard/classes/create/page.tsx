@@ -5,7 +5,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export default async function Page() {
 
-  // Fetch session token
+  /*// Fetch session token
   const sessionName = 'currentSession'; // Adjust session name according to your setup
   const token = await fetchSessionToken(sessionName);
   console.log('Session token:', token);
@@ -20,7 +20,7 @@ export default async function Page() {
     console.error('Error verifying token:', error);
     // Handle error if token verification fails or token is null
     return null; // Or handle the error in some other way
-  }
+  }*/
 
   /*// Extract user ID from decoded token
   const sessionUserId = typeof decodedToken === 'string' ? decodedToken : decodedToken?.id;
@@ -31,8 +31,8 @@ export default async function Page() {
 
   const teachers = await fetchAllTeachersEmail(schoolName);*/
     // Extract school_name from decoded token
-    const schoolName = decodedToken?.school_name;
-    const teachers = await fetchAllTeachersEmail(schoolName);
+    /*const schoolName = decodedToken?.school_name;
+    const teachers = await fetchAllTeachersEmail(schoolName);*/
 
   return (
     <main>
@@ -46,7 +46,7 @@ export default async function Page() {
           },
         ]}
       />
-      <Form teachers={teachers} />
+      <Form />
     </main>
   );
 }

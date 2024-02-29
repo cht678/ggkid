@@ -74,7 +74,7 @@ export async function createStudent(formData: FormData): Promise<{ success: bool
       address: formData.get('address'),
       postcode: formData.get('postcode'),
       zone: formData.get('zone') || '',
-      class_name: formData.get('class_name') || '',
+      //class_name: formData.get('class_name') || '',
       parent_id: formData.get('parent_id') || '',
       status: 'New',
       school_name: schoolName, // Pass school_name extracted from token
@@ -583,7 +583,7 @@ export async function createClass(formData: FormData): Promise<{ success: boolea
     const validatedData = classSchema.parse({
       class_name: formData.get('class_name'),
       class_level: formData.get('class_level'),
-      teacherid: formData.get('teacher_email') || '',
+      //teacherid: formData.get('teacher_email') || '',
       school_name: school_name, // Pass school_name extracted from token
     });
 

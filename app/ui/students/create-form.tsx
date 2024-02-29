@@ -8,10 +8,9 @@ import { createStudent } from '@/app/lib/actions';
 
 interface Props {
   parents: string[]; // Define the type of the parents prop
-  classes: string[]; // Define the type of the classes prop
 }
 
-export default function Form({ parents, classes }: Props) {
+export default function Form({ parents }: Props) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -161,7 +160,7 @@ export default function Form({ parents, classes }: Props) {
         </div>
 
         {/* Class Name */}
-        <div className="mb-4">
+        {/*<div className="mb-4">
           <label htmlFor="class_name" className="mb-2 block text-sm font-medium">
             Class Name
           </label>
@@ -179,7 +178,7 @@ export default function Form({ parents, classes }: Props) {
               ))}
             </select>
           </div>
-        </div>
+        </div>*/}
 
         {/* Parent's Email */}
         <div className="mb-4">
